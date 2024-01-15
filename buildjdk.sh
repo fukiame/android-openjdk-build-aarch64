@@ -9,7 +9,7 @@ if [[ "$TARGET_JDK" == "arm" ]] # || [[ "$BUILD_IOS" == "1" ]]
 then
   export CFLAGS+=" -O3 -D__thumb__"
 else
-  export CFLAGS+=" -O3"
+  export CFLAGS+=" -Ofast"
 fi
 
 # if [[ "$TARGET_JDK" == "aarch32" ]] || [[ "$TARGET_JDK" == "aarch64" ]]
