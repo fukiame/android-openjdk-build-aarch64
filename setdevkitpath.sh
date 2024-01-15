@@ -12,6 +12,11 @@ then
   export JDK_DEBUG_LEVEL=release
 fi
 
+if [ -z "$JVM_VARIANTS" ]
+then
+  export JVM_VARIANTS=server
+fi
+
 export TARGET_SHORT=arm64
 
 export JVM_PLATFORM=linux
