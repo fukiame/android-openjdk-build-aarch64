@@ -2,8 +2,6 @@
 set -e
 . setdevkitpath.sh
 
-if [[ "$BUILD_IOS" != "1" ]]; then
-
 unset AR AS CC CXX LD OBJCOPY RANLIB STRIP CPPFLAGS LDFLAGS
 git clone --depth 1 -b 'v2.2.0' https://github.com/termux/termux-elf-cleaner || true
 cd termux-elf-cleaner
@@ -25,7 +23,6 @@ exit 1
 findexec jreout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
 findexec jdkout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
 
-fi
 
 cp -rv jre_override/lib/* jreout/lib/ || true
 
