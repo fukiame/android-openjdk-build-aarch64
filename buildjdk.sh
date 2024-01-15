@@ -8,17 +8,6 @@ export FREETYPE_DIR=$PWD/freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_
 export CUPS_DIR=$PWD/cups-2.2.4
 export CFLAGS+=" -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DI
 
-# if [ "$TARGET_JDK" == "aarch32" ] || [ "$TARGET_JDK" == "aarch64" ]
-# then
-#   export CFLAGS+=" -march=armv7-a+neon"
-# fi
-
-# It isn't good, but need make it build anyways
-# cp -R $CUPS_DIR/* $ANDROID_INCLUDE/
-
-# cp -R /usr/include/X11 $ANDROID_INCLUDE/
-# cp -R /usr/include/fontconfig $ANDROID_INCLUDE/
-
 export CFLAGS+=" -O3 -D__ANDROID__"
 
 ln -s -f /usr/include/X11 $ANDROID_INCLUDE/
@@ -35,8 +24,6 @@ ar cru dummy_libs/libthread_db.a
 # fix building libjawt
 ln -s -f $CUPS_DIR/cups $ANDROID_INCLUDE/
 
-#FREEMARKER=$PWD/freemarker-2.3.8/lib/freemarker.jar
-
 cd openjdk
 
 # Apply patches
@@ -44,16 +31,6 @@ git reset --hard
 git apply --reject --whitespace=fix ../patches/jdk8u_android.diff || echo "git apply failed (universal patch set)"
 git apply --reject --whitespace=fix ../patches/jdk8u_android_main.diff || echo "git apply failed (main non-universal patch set)"
 
-#   --with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
-#   --with-extra-cflags="$CPPFLAGS" \
-#   --with-sysroot="$(xcrun --sdk iphoneos --show-sdk-path)" \
-
-# Let's print what's available
-# bash configure --help
-
-#   --with-freemarker-jar=$FREEMARKER \
-#   --with-toolchain-type=clang \
-#   --with-native-debug-symbols=none \
 bash ./configure \
     --openjdk-target=$TARGET_PHYS \
     --with-extra-cflags="$CFLAGS" \
