@@ -8,8 +8,8 @@ export FREETYPE_DIR=$PWD/freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_
 export CUPS_DIR=$PWD/cups-2.2.4
 export CFLAGS+=" -DLE_STANDALONE" # -I$FREETYPE_DIR -I$CUPS_DI
 
-export CFLAGS+=" -O3 -D__ANDROID__"
-export CFLAGS+=" -march=armv8-a -fno-semantic-interposition"
+export CFLAGS+=" -Ofast -D__ANDROID__"
+export CFLAGS+=" -march=armv8-a"
 
 ln -s -f /usr/include/X11 $ANDROID_INCLUDE/
 ln -s -f /usr/include/fontconfig $ANDROID_INCLUDE/
