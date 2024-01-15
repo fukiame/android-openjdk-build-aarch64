@@ -8,7 +8,7 @@ targetpath=openjdk/build/${JVM_PLATFORM}-${TARGET_JDK}-${JVM_VARIANTS}-${JDK_DEB
 rm -rf dizout jreout jdkout dSYM-temp
 mkdir -p dizout dSYM-temp/{lib,bin}
 
-if [ "$BUILD_IOS" != "1" ]; then
+if [[ "$BUILD_IOS" != "1" ]]; then
    cp freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_SHORT/lib/libfreetype.so $targetpath/images/jdk/lib/
 fi
 
@@ -31,7 +31,7 @@ $targetpath/buildjdk/jdk/bin/jlink \
 --release-info=jdkout/release \
 --compress=0
 
-if [ "$BUILD_IOS" != "1" ]; then
+if [[ "$BUILD_IOS" != "1" ]]; then
    cp freetype-$BUILD_FREETYPE_VERSION/build_android-$TARGET_SHORT/lib/libfreetype.so jreout/lib/
 fi
 
@@ -46,7 +46,7 @@ find jdkout -name "*.dSYM"  | xargs -- rm -rf
 
 #TODO: fix .dSYM stuff
 
-if [ "$BUILD_IOS" == "1" ]; then
+if [[ "$BUILD_IOS" == "1" ]]; then
   install_name_tool -id @rpath/libfreetype.dylib jdkout/lib/libfreetype.dylib
   install_name_tool -id @rpath/libfreetype.dylib jreout/lib/libfreetype.dylib
   install_name_tool -change build_android-arm64/lib/libfreetype.dylib @rpath/libfreetype.dylib jdkout/lib/libfontmanager.dylib
