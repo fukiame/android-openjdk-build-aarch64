@@ -16,37 +16,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Build with CI build script
       run: bash "ci_build_arch_aarch64.sh"
-    - name: Upload JDK build output
-      uses: actions/upload-artifact@v2
-      with:
-        name: "jdk21-aarch64"
-        path: jdk21*.tar.xz
     - name: Upload JRE build output
       uses: actions/upload-artifact@v2
       with:
         name: 'jre21-aarch64'
         path: jre21*.tar.xz
-    - name: Upload JRE debuginfo build output
-      uses: actions/upload-artifact@v2
-      with:
-        name: "jre21-debuginfo-aarch64"
-        path: dizout
-
-  pojav:
-    needs: build_android
-    runs-on: ubuntu-20.04
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Get jre21-aarch64
-      uses: actions/download-artifact@v2
-      with:
-        name: jre21-aarch64
-        path: pojav
-    - name: Repack JRE
-      run: bash "repackjre.sh" $GITHUB_WORKSPACE/pojav $GITHUB_WORKSPACE/pojav/jre21-pojav
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-          name: jre21-pojav
-          path: pojav/jre21-pojav/*
