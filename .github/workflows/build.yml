@@ -30,10 +30,6 @@ jobs:
         name: "jdk8-aarch64"
         path: jdk8*.tar.xz
 
-    - name: Setup tmate session if failed
-      if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
-
     - name: Upload JRE build output
       uses: actions/upload-artifact@v2
       with:
