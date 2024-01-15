@@ -27,7 +27,6 @@ AUTOCONF_x11arg="--x-includes=$ANDROID_INCLUDE/X11"
 
 export LDFLAGS+=" -L`pwd`/dummy_libs"
 
-sudo apt -y install systemtap-sdt-dev gcc-multilib g++-multilib libxtst-dev libasound2-dev libelf-dev libfontconfig1-dev libx11-dev
 # Create dummy libraries so we won't have to remove them in OpenJDK makefiles
 mkdir -p dummy_libs
 ar cru dummy_libs/libpthread.a

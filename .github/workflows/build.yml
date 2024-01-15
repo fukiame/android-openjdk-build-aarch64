@@ -19,7 +19,11 @@ jobs:
       with:
         java-version: 1.7
     - name: Build with CI build script
-      run: bash "ci_build_arch_aarch64.sh"
+      run: |
+        sudo apt update
+        sudo apt -y install autoconf python unzip zip
+        sudo apt -y install systemtap-sdt-dev gcc-multilib g++-multilib libxtst-dev libasound2-dev libelf-dev libfontconfig1-dev libx11-dev
+        bash "ci_build_arch_aarch64.sh"
     - name: Upload JDK build output
       uses: actions/upload-artifact@v2
       with:
