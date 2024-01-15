@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-if [ "$BUILD_IOS" != "1" ]; then
-
 unset AR AS CC CXX LD OBJCOPY RANLIB STRIP CPPFLAGS LDFLAGS
 git clone https://github.com/termux/termux-elf-cleaner
 cd termux-elf-cleaner
@@ -23,8 +21,6 @@ exit 1
 
 findexec jreout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
 findexec jdkout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
-
-fi
 
 sudo cp -R jre_override/lib/* jreout/lib/
 sudo cp -R jre_override/lib/* jdkout/jre/lib
