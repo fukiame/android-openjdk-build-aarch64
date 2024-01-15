@@ -15,7 +15,7 @@ export PATH=$TOOLCHAIN/bin:$PATH
   --with-harfbuzz=no $EXTRA_ARGS \
   || error_code=$?
 
-if [ "$error_code" -ne 0 ]; then
+if [[ "$error_code" -ne 0 ]]; then
   echo "\n\nCONFIGURE ERROR $error_code , config.log:"
   cat config.log
   exit $error_code
@@ -24,6 +24,6 @@ fi
 CFLAGS=-fno-rtti CXXFLAGS=-fno-rtti make -j4
 make install
 
-if [ -f "${namefreetype}.a" ]; then
+if [[ -f "${namefreetype}.a" ]]; then
   clang -fPIC -shared $LDFLAGS -lbz2 -Wl,-all_load ${namefreetype}.a -o ${namefreetype}.dylib
 fi
